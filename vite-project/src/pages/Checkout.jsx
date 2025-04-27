@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {loadStripe} from '@stripe/stripe-js';
 import {
@@ -13,11 +13,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 function Checkout() {
+  const navigate=useNavigate();
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1); // Local state to manage quantity
   const { id } = useParams();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const isAuthenticated=useSelector((state)=>state.auth.isAuthenticated)
   // const Item = cartItems.find((p) => p._id === id); 
 
   useEffect(() => {
@@ -195,7 +197,8 @@ function Checkout() {
             </div>
 
             <div className="bg-[#DB1215] w-full rounded-sm text-white font-semibold py-2 flex items-center justify-center cursor-pointer">
-              <h1 onClick={handlePayment}>BUY IT NOW</h1>
+            <h1 onClick={isAuthenticated ? handlePayment : () => navigate('/login',{ state: { from: `/checkout/${id}` } })}>BUY IT NOW</h1>
+
             </div>
 
             <div className="flex w-[100%] md:flex-row flex-col gap-6 md:justify-between">

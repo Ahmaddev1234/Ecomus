@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import LoginModal from '../components/LoginModal';
-import SignupModal from '../components/SignupModal';
 import { useSelector,useDispatch } from 'react-redux';
 import { loginSuccess, logout } from '../features/auth/authSlice';
 import { toast } from 'react-toastify';
@@ -10,10 +8,13 @@ import { toast } from 'react-toastify';
 function Navbar() {
   const location = useLocation();
   const dispatch=useDispatch();
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
   const navigate=useNavigate();
 
   const isAuthenticated=useSelector((state)=>state.auth.isAuthenticated);
+  const role = useSelector((state) => state.auth.role);
+  const isAdmin = role?.includes("admin") || role === "admin";
+  
+  
   const handleLogout=async()=>{
     try {
       const response = await fetch("http://localhost:3000/users/logout", {
@@ -43,24 +44,7 @@ function Navbar() {
   }
 
 
-  const [isLoginOpen,setIsLoginOpen]=useState(false);
-  const [isSignupOpen,setIsSignupOpen]=useState(false);
-  const LoginModalOpen=()=>{
-      setIsLoginOpen(true);
-      setIsSignupOpen(false);
-  }
-  const LoginModalClose=()=>{
-    setIsLoginOpen(false);
-  }
 
-  const SignupModalOpen=()=>{
-    setIsSignupOpen(true);
-    setIsLoginOpen(false);
-  }
-
-  const SignupModalClose=()=>{
-    setIsSignupOpen(false);
-  }
 
   const isHomePage = location.pathname === "/";
   const navbarBg = isHomePage ? "md:text-white" : "md:text-black"
@@ -74,7 +58,7 @@ function Navbar() {
         <div className='absolute right-8 top-3 text-3xl md:hidden' onClick={handleisopen}>
       <ion-icon name={isOpen?"close-outline":"menu-outline"}></ion-icon>
       </div>
-      <ul className={`md:flex md:gap-6 absolute md:static  md:z-auto z-[-1]  left-0 w-full md:w-auto md:pl-0 pl-6  md:bg-transparent bg-whitetransition-all duration-all ease-in ${isOpen?"top-12":"top-[-490px]"}`} >
+      <ul className={`md:flex md:gap-6 absolute md:static  md:z-auto z-[-1]  left-0 w-full md:w-auto md:pl-0 pl-6  md:bg-transparent bg-white md:pb-0 pb-11 duration-all ease-in ${isOpen?"top-12":"top-[-490px]"}`} >
           <li className=' md:my-0 md:font-semibold my-7 font-normal text-2xl  md:text-lg hover:text-yellow-400' ><Link to="/">Home</Link></li>
           <li className=' md:my-0 md:font-semibold my-7 font-normal text-2xl md:text-lg hover:text-yellow-400' ><Link to="/shopcollection">Shop</Link></li>
           <li className=' md:my-0 md:font-semibold my-7 font-normal text-2xl  md:text-lg hover:text-yellow-400' ><Link to="/shopcollection">Products</Link></li>
@@ -85,9 +69,10 @@ function Navbar() {
         
           <button
             className=" "
-            onClick={LoginModalOpen} // Open the modal when clicked
+            onClick={()=>navigate('/login')} 
           >
           <div className='flex  '>
+          
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 hover:text-yellow-500">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
@@ -95,6 +80,9 @@ function Navbar() {
           
           </button>
           }
+          {isAdmin?(
+            <button className='px-2 py-1 font-semibold bg-white text-black rounded-md ' onClick={()=>navigate('/addproducts')}>Dashboard</button>
+          ):(<>
           <button onClick={()=>navigate('/cart')}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 hover:text-yellow-500">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
@@ -107,17 +95,11 @@ function Navbar() {
           </svg>
 
           </button>
+          </>
+          )}
         </div>
         </nav>
       </div>
-
-      {/* Modal Component */}
-      {isLoginOpen && 
-      <LoginModal closeModal={LoginModalClose} signup={SignupModalOpen}/>
-      }
-      {isSignupOpen &&
-      <SignupModal closeModal={SignupModalClose} login={LoginModalOpen}/>
-      }
 
     </>
   );

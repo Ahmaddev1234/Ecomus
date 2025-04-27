@@ -11,6 +11,8 @@ import Categories from './pages/Categories'
 import ProtectedRoute from './partials/ProtectedRoute';
 import { useSelector } from "react-redux";
 import AllProducts from './pages/AllProducts';
+import Login from './pages/Login'
+import Signup from './pages/Signup';
 
 const App = () => {
 
@@ -35,6 +37,8 @@ const App = () => {
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/categories/:id" element={<Categories />} />
           <Route path="/shopcollection" element={<AllProducts />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/success" element={<Success />} />
         <Route path="/cancel" element={<Cancel />} />
         </Routes>

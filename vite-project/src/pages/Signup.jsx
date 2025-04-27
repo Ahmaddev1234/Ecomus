@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from 'react'
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-function SignupModal({ closeModal, login }) {
+function Signup() {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
+  const navigate=useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -34,7 +36,7 @@ function SignupModal({ closeModal, login }) {
 
 
   return (
-    <div className='fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 font-sans'>
+    <div className='fixed inset-0 bg-white  flex justify-center items-center  font-sans'>
       <div className="bg-white p-8 rounded-sm shadow-lg md:w-[53%] w-[100%] gap-8 relative" >
         <h2 className="text-3xl font-light mb-4 font-sans pb-8 pt-4">Sign Up</h2>
         {/* Add your form inputs here */}
@@ -66,7 +68,8 @@ function SignupModal({ closeModal, login }) {
               Sign up
             </button>
             <button
-              onClick={login}
+              type="button"
+              onClick={()=>navigate('/login')}
               className=" text-black  text-[15px]  font-medium px-4 py-2  w-[50%] h-[50px] underline underline-offset-4"
             >
               Already have an account? Login
@@ -75,15 +78,9 @@ function SignupModal({ closeModal, login }) {
         </form>
 
         {/* Close button */}
-        <button
-          onClick={closeModal} // Close the modal when clicked
-          className="absolute top-8 right-10 text-black text-[40px] font-light hover:text-gray-700 z-60"
-        >
-          &times; {/* Using &times; for the close 'X' */}
-        </button>
       </div>
     </div>
   )
 }
 
-export default SignupModal
+export default Signup
