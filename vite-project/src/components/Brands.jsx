@@ -36,7 +36,7 @@ function Brands() {
                         <img
                             src={item.imgUrl}
                             alt=""
-                             // ✅ FIXED: Correct className syntax
+                             
                             style={{ width: item.imgWidth }}
                         />
                     </div>

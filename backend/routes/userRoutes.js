@@ -109,12 +109,12 @@ router.get('/cart', checkAuth, async (req, res) => {
 
         const cartItems = user.cart || [];
 
-        // Get all product details from cart
+        
         const cart = await productsSchema.find({
             _id: { $in: cartItems.map(item => item.productId) }
         });
 
-        // Format the response with product details + cart quantity
+        
         const formattedData = cart.map((product) => {
             const cartItem = cartItems.find(item => item.productId.toString() === product._id.toString());
 
@@ -126,8 +126,8 @@ router.get('/cart', checkAuth, async (req, res) => {
                 stock: product.stock,
                 discount: product.discount,
                 category: product.category,
-                quantity: cartItem?.quantity || 1, // Correct quantity from cart
-                cartItemId: cartItem?._id, // Optional: include the cart item's _id
+                quantity: cartItem?.quantity || 1, 
+                cartItemId: cartItem?._id, 
                 imageUrl: `http://localhost:3000/products/${product._id}/image`
             };
         });
@@ -144,36 +144,36 @@ router.get('/cart', checkAuth, async (req, res) => {
 
 router.post("/cart/add", checkAuth, async (req, res) => {
     try {
-        const userId = req.userid; // Extract userId from middleware
+        const userId = req.userid; 
         const { id, quantity } = req.body;
         if (!id || !quantity) {
             return responseFunction(res, 400, "id or quantity are missing", null, false);
           }
 
-        // Check if product exists
+        
         const product = await productsSchema.findById(id);
         if (!product) {
             return responseFunction(res, 400, "Product not found", null, false);
         }
 
-        // Fetch user from DB
+        
         const user = await usersSchema.findById(userId);
         if (!user) {
             return responseFunction(res, 400, "User not found", null, false);
         }
 
-        // Check if the product is already in the cart
+        
         const existingItem = user.cart.find(item => item.productId.toString() === id);
 
         if (existingItem) {
-            // If product is already in cart, update quantity
+            
             existingItem.quantity += quantity;
         } else {
-            // If not, add new product to cart
+            
             user.cart.push({ productId: id, quantity });
         }
 
-        // Save updated cart
+        
         await user.save();
 
         return responseFunction(res, 200, "Product added to cart", user.cart, true);
@@ -194,18 +194,18 @@ router.post('/cart/remove', checkAuth, async (req, res) => {
         return responseFunction(res, 404, "User not found", null, false);
       }
   
-      // Find the cart item
+      
       const cartItem = user.cart.find(item => item.productId.toString() === productId);
   
       if (!cartItem) {
         return responseFunction(res, 404, "Item not found in cart", null, false);
       }
   
-      // Decrease quantity if more than 1
+      
       if (cartItem.quantity > 1) {
         cartItem.quantity -= 1;
       } else {
-        // Optional: If quantity is 1, remove it from cart
+        
         user.cart = user.cart.filter(item => item.productId.toString() !== productId);
       }
   

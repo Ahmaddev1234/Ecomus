@@ -36,7 +36,7 @@ const Carousel = ({sliderRef}) => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-      // 👈 Ensures proper spacing without cutting slides
+      
   
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 2 } },

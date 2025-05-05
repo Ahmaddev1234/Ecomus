@@ -34,24 +34,6 @@ function BestSeller() {
     return ()=>ctx.revert();
     }, []);
 
-    const magicEnter = (index) => {
-        gsap.to(favRef.current[index], {
-            y: 0,
-            opacity: 1,
-            duration: 0.3,
-            stagger: 0.1,
-        });
-    };
-
-    const magicLeave = (index) => {
-        gsap.to(favRef.current[index], {
-            y: 20,
-            opacity: 0,
-            duration: 0.3,
-            stagger: 0.3,
-        });
-    };
-
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -98,13 +80,6 @@ function BestSeller() {
                                 src={product.imageUrl} 
                                 alt={product.name} 
                             />
-                            <div 
-                                className="gap-4 absolute bottom-4 left-28 flex flex-row opacity-0" 
-                                ref={(el) => (favRef.current[index] = el)}
-                            >
-                                <i className="ri-heart-line text-2xl font-light bg-white px-1 rounded-md hover:bg-black hover:text-white"></i>
-                                <i className="ri-shopping-bag-4-line text-2xl font-light bg-white px-1 rounded-md hover:bg-black hover:text-white"></i>
-                            </div>
                         </div>
                         <div className="flex flex-col mt-6 text-center justify-center">
                             <h1 className="text-md font-normal">{product.name}</h1>

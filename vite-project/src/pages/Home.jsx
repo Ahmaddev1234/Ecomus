@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <div className='flex flex-col relative'>
-    <div className='w-screen overflow-hidden relative'>
+    <div className='w-screen overflow-hidden relative pt-0 mt-0'>
       <Courousal />
         <Text/>
     </div>

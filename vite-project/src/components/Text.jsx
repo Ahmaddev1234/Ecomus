@@ -9,9 +9,9 @@ function Text() {
   useEffect(() => {
     if (devs.current) {
       gsap.fromTo(
-        devs.current.children, // Target parent div
-        { y: 400, opacity: 0 }, // Start values
-        { y: 0, opacity: 1, duration: 0.4,stagger:0.4 } // End values
+        devs.current.children, 
+        { y: 400, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.4,stagger:0.4 } 
       );
     }
   }, []);

@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { loginSuccess, logout } from '../features/auth/authSlice';
 import { toast } from 'react-toastify';
+import Headroom from 'react-headroom';
 
 
 function Navbar() {
@@ -46,19 +47,23 @@ function Navbar() {
 
 
 
-  const isHomePage = location.pathname === "/";
-  const navbarBg = isHomePage ? "md:text-white" : "md:text-black"
+
 
 
   return (
     <>
-      <div className="w-full fixed top-0 left-0 z-50 ">
-        <nav className={`md:flex md:justify-between md:px-12 md:py-6 sm:py-2   md:items-center ${navbarBg} md:bg-transparent  bg-white z-50`}>
-        <h1 className="text-4xl font-bold text-yellow-400 md:p-0 pl-3 p-3">Ecomus</h1>
+    <Headroom
+      upTolerance={10}   
+      downTolerance={10}
+    >
+      <div className="w-full  left-0 z-50 style={{ zIndex: 9999 }}">
+        
+        <nav className={` md:flex md:justify-between md:px-12 md:py-3 sm:py-2  md:backdrop-blur-md md:backdrop-saturate-150   md:items-center md:text-white md:bg-zinc-900  bg-white z-50`}>
+        <h1 className="text-4xl font-bold text-sky-400 md:p-0 pl-3 p-3">Ecomus</h1>
         <div className='absolute right-8 top-3 text-3xl md:hidden' onClick={handleisopen}>
       <ion-icon name={isOpen?"close-outline":"menu-outline"}></ion-icon>
       </div>
-      <ul className={`md:flex md:gap-6 absolute md:static  md:z-auto z-[-1]  left-0 w-full md:w-auto md:pl-0 pl-6  md:bg-transparent bg-white md:pb-0 pb-11 duration-all ease-in ${isOpen?"top-12":"top-[-490px]"}`} >
+      <ul className={`md:flex md:gap-14 absolute md:static  md:z-auto z-[-1]  left-0 w-full md:w-auto md:pl-0 pl-6  md:bg-transparent bg-white md:pb-0 pb-11 transition-all duration-300 ease-in ${isOpen?"top-12":"top-[-490px]"}`} >
           <li className=' md:my-0 md:font-semibold my-7 font-normal text-2xl  md:text-lg hover:text-yellow-400' ><Link to="/">Home</Link></li>
           <li className=' md:my-0 md:font-semibold my-7 font-normal text-2xl md:text-lg hover:text-yellow-400' ><Link to="/shopcollection">Shop</Link></li>
           <li className=' md:my-0 md:font-semibold my-7 font-normal text-2xl  md:text-lg hover:text-yellow-400' ><Link to="/shopcollection">Products</Link></li>
@@ -89,18 +94,12 @@ function Navbar() {
           </svg>
 
           </button>
-          <button>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 hover:text-yellow-500">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-          </svg>
-
-          </button>
           </>
           )}
         </div>
         </nav>
       </div>
-
+      </Headroom>
     </>
   );
 }

@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         const data = await productsSchema.find({});
 
-        // ✅ Convert binary image data to a URL
+        
         const formattedData = data.map((product) => ({
             _id: product._id,
             name: product.name,
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
             stock: product.stock,
             discount: product.discount,
             category: product.category,
-            imageUrl: `http://localhost:3000/products/${product._id}/image` // ✅ New image URL
+            imageUrl: `http://localhost:3000/products/${product._id}/image` 
         }));
 
         return responseFunction(res, 200, "Data is fetched", formattedData, true);
@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ✅ Add Route to Serve Image
+
 router.get("/:id/image", async (req, res) => {
     try {
         const product = await productsSchema.findById(req.params.id);
@@ -34,12 +34,15 @@ router.get("/:id/image", async (req, res) => {
             return res.status(404).json({ error: "Image not found" });
         }
 
-        res.set("Content-Type", product.file.contentType); // ✅ Set correct image type
-        return res.send(product.file.data); // ✅ Send binary image data
+        res.set("Content-Type", product.file.contentType); 
+        return res.send(product.file.data); 
     } catch (err) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 });
+
+
+
 
 
 
@@ -70,7 +73,7 @@ router.get("/categories/:id", async (req, res) => {
         const category=Category.toLowerCase();
         const data = await productsSchema.find({category});
 
-        // ✅ Convert binary image data to a URL
+        
         const formattedData = data.map((product) => ({
             _id: product._id,
             name: product.name,
@@ -79,7 +82,7 @@ router.get("/categories/:id", async (req, res) => {
             stock: product.stock,
             discount: product.discount,
             category: product.category,
-            imageUrl: `http://localhost:3000/products/${product._id}/image` // ✅ New image URL
+            imageUrl: `http://localhost:3000/products/${product._id}/image` 
         }));
 
         return responseFunction(res, 200, "Data is fetched", formattedData, true);

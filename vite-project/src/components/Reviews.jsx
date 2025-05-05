@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger"; // ✅ Import ScrollTrigger
+import { ScrollTrigger } from "gsap/ScrollTrigger"; 
 import ReviewsCourousal from "./ReviewsCourousal";
 
 
@@ -13,7 +13,6 @@ function Reviews() {
         if(textRef.current.children){
         gsap.fromTo(textRef.current.children,{y:100,opacity:0},{y:0,opacity:1,duration: 0.8,delay:0.1,stagger:0.4,scrollTrigger:{
             trigger:textRef.current,
-            // scroller:mainRef.current,
             start:"top 80%",
             end:"top 30%",        
             

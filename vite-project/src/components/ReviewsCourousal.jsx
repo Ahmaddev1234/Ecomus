@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import gsap from 'gsap'
-import { ScrollTrigger } from "gsap/ScrollTrigger"; // ✅ Import ScrollTrigger
+import { ScrollTrigger } from "gsap/ScrollTrigger"; 
 
 
 const Carousel = () => {
@@ -46,7 +46,7 @@ const Carousel = () => {
       { breakpoint: 768, settings: { slidesToShow: 1 } }
 
     ],
-    // beforeChange: () => triggerAnimation(),
+    
   };
 
   useEffect(() => {

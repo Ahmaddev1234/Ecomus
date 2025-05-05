@@ -13,8 +13,8 @@ function checkAuth(req, res, next) {
             return responseFunction(res, 400, "Please login to continue", null, false);
         }
         
-        req.userid = decoded.id; // Use `decoded.id` since the token contains `id`
-        req.userrole = decoded.role; // Use `decoded.id` since the token contains `id`
+        req.userid = decoded.id; 
+        req.userrole = decoded.role; 
         next();
     });
 }

@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import AllProducts from './pages/AllProducts';
 import Login from './pages/Login'
 import Signup from './pages/Signup';
+import Headroom from 'react-headroom';
+
 
 const App = () => {
 
@@ -22,7 +24,9 @@ const App = () => {
   return (
     <>
       <Router>
-        <Navbar />
+        
+          <Navbar />
+          
         <Routes>
           <Route path="/" element={<Home />} />
 
