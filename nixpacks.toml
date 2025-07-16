@@ -1,0 +1,8 @@
+[build]
+base = "nodejs"
+
+[variables]
+NODE_ENV = "production"
+
+[start]
+cmd = "node app.js"
