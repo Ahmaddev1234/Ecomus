@@ -22,7 +22,7 @@ function Cart() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:3000/users/cart', {
+      const response = await fetch('https://ecomus-backnd-production.up.railway.app/users/cart', {
         method: 'GET',
         credentials: 'include',
       });
@@ -49,7 +49,7 @@ function Cart() {
 
   const handleRemove = async (productId) => {
     try {
-      const response = await fetch('http://localhost:3000/users/cart/remove', {
+      const response = await fetch('https://ecomus-backnd-production.up.railway.app/users/cart/remove', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function Cart() {
 
   const handleAdd = async (productId) => {
     try {
-      const response = await fetch('http://localhost:3000/users/cart/add', {
+      const response = await fetch('https://ecomus-backnd-production.up.railway.app/users/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

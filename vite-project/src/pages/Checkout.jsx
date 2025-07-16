@@ -25,7 +25,7 @@ function Checkout() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await fetch(`http://localhost:3000/products/checkout/${id}`);
+        const data = await fetch(`https://ecomus-backnd-production.up.railway.app/products/checkout/${id}`);
         const product = await data.json();
         setProduct(product.data || []);
       } catch (err) {
@@ -52,7 +52,7 @@ function Checkout() {
   // Add to cart
   const addToCartHandler = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/users/cart/add`, {
+      const response = await fetch(`https://ecomus-backnd-production.up.railway.app/users/cart/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ function Checkout() {
         quantity:quantity
       }
           try {
-      const response = await fetch('http://localhost:3000/users/create-checkout', {
+      const response = await fetch('https://ecomus-backnd-production.up.railway.app/users/create-checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

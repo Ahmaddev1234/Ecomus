@@ -18,7 +18,7 @@ function Navbar() {
   
   const handleLogout=async()=>{
     try {
-      const response = await fetch("http://localhost:3000/users/logout", {
+      const response = await fetch("https://ecomus-backnd-production.up.railway.app/users/logout", {
         method: "POST",
         credentials: "include",
       });

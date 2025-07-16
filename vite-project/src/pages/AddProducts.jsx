@@ -27,7 +27,7 @@ function AddProducts() {
     data.append("category", category);
 
     try {
-      const response = await fetch("http://localhost:3000/owners/addproducts", {
+      const response = await fetch("https://ecomus-backnd-production.up.railway.app/addproducts", {
         method: "POST",
         body: data,
         credentials: 'include'

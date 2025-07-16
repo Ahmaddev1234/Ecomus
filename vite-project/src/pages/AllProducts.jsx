@@ -56,7 +56,7 @@ function AllProducts() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch("http://localhost:3000/products");
+                const response = await fetch("https://ecomus-backnd-production.up.railway.app/products");
                 const data = await response.json();
                 setProducts(data.data || []); 
                 ScrollTrigger.refresh();

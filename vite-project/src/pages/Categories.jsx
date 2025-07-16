@@ -60,7 +60,7 @@ function BestSeller() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/products/categories/${id}`);
+                const response = await fetch(`https://ecomus-backnd-production.up.railway.app/products/categories/${id}`);
                 const data = await response.json();
                 setProducts(data.data || []);
                 ScrollTrigger.refresh();
