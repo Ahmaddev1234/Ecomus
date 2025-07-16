@@ -53,7 +53,7 @@ const Carousel = ({sliderRef}) => {
       <Slider ref={sliderRef} {...settings}>
         {items.map((item, index) => (
           <div key={index} className={`w-[280px] md:h-[350px] ${item.bgColor} overflow-hidden border-white border-[8px]   h-[250px] rounded-lg relative`}>
-            <img className=" w-full  object-cover" src={item.imgSrc} alt="" />
+            <img loading="lazy" className=" w-full  object-cover" src={item.imgSrc} alt="" />
             <button className="group py-2 px-8 bg-white rounded-sm font-semibold text-black absolute md:top-[285px] top-[180px] md:left-[20px] left-2 hover:bg-black hover:text-white" onClick={()=>resolve(item.btnText)}>
               {item.btnText} <i className="ri-arrow-right-up-line hidden group-hover:inline"></i>
             </button>

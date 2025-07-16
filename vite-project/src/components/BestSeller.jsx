@@ -75,7 +75,7 @@ function BestSeller() {
                         onMouseLeave={() => magicLeave(index)}
                     >
                         <div className="relative h-[400px] bg-gray-200 w-[100%] rounded-lg overflow-hidden">
-                            <img 
+                            <img loading="lazy"
                                 className="object-cover w-[100%] h-[100%] hover:scale-110 transition-transform duration-1000" 
                                 src={product.imageUrl} 
                                 alt={product.name} 
