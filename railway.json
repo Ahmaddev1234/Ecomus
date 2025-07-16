@@ -4,6 +4,13 @@
       "buildCommand": "npm install",
       "startCommand": "node server.js",
       "rootDir": "backend"
+    },
+    "nixpacks": {
+      "phases": {
+        "setup": {
+          "nixPkgs": ["nodejs"]
+        }
+      }
     }
   }
   
