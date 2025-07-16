@@ -1,61 +1,56 @@
-import React ,{ lazy,Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './partials/Navbar';
-// import Home from './pages/home';
-// import Cart from './pages/Cart';
-// import AddProducts from './pages/AddProducts';
 import { ToastContainer } from 'react-toastify';
-// import Checkout from './pages/Checkout';
 import Success from './components/Success';
 import Cancel from './components/Cancel';
-// import Categories from './pages/Categories'
 import ProtectedRoute from './partials/ProtectedRoute';
 import { useSelector } from "react-redux";
-// import AllProducts from './pages/AllProducts'; 
-// import Login from './pages/Login'
-// import Signup from './pages/Signup';
-const Home=React.lazy(()=>import('./pages/home'))
-const Cart=React.lazy(()=>import('./pages/Cart'))
-const AddProducts=React.lazy(()=>import('./pages/AddProducts'))
-const Checkout=React.lazy(()=>import('./pages/Checkout'))
-const Categories=React.lazy(()=>import('./pages/Categories'))
-const Login=React.lazy(()=>import('./pages/AllProducts'))
-const AllProducts=React.lazy(()=>import('./pages/Login'))
-const Signup=React.lazy(()=>import('./pages/Signup'))
-
 import Headroom from 'react-headroom';
 
+// Lazy-loaded components (ensure file names exactly match these)
+const Home = lazy(() => import('./pages/Home'));
+const Cart = lazy(() => import('./pages/Cart'));
+const AddProducts = lazy(() => import('./pages/AddProducts'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const Categories = lazy(() => import('./pages/Categories'));
+const AllProducts = lazy(() => import('./pages/AllProducts'));
+const Login = lazy(() => import('./pages/Login'));
+const Signup = lazy(() => import('./pages/Signup'));
 
 const App = () => {
-
-
-  
-
   return (
     <>
       <Router>
-        
-          <Navbar />
-          <Suspense fallback={<div>Loading....</div>}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={
-            <ProtectedRoute requiredRole={["user", "admin"]}>
-            <Cart />
-            </ProtectedRoute>} />
-          <Route path="/addproducts" element={
-            <ProtectedRoute requiredRole="admin">
-            <AddProducts />
-            </ProtectedRoute>} />
-          <Route path="/checkout/:id" element={<Checkout />} />
-          <Route path="/categories/:id" element={<Categories />} />
-          <Route path="/shopcollection" element={<AllProducts />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/success" element={<Success />} />
-        <Route path="/cancel" element={<Cancel />} />
-        </Routes>
-        </Suspense> 
+        <Navbar />
+        <Suspense fallback={<div>Loading....</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute requiredRole={["user", "admin"]}>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/addproducts"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <AddProducts />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/checkout/:id" element={<Checkout />} />
+            <Route path="/categories/:id" element={<Categories />} />
+            <Route path="/shopcollection" element={<AllProducts />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/success" element={<Success />} />
+            <Route path="/cancel" element={<Cancel />} />
+          </Routes>
+        </Suspense>
         <ToastContainer />
       </Router>
     </>
